@@ -17,9 +17,12 @@ class TreeTest(TestCase):
                 parent = Node.objects.create_with_relation(
                     name='sons_{}_{}'.format(i, j), parent_id=parent.id)
 
+    def test_get(self):
+        print(Node.objects.get_tree(self.root_node.id))
+
     def test_delete(self):
         for item in NodeRelation.objects.all():
-            print(item.id, item.ancestor, item.posterity, item.id)
+            print(item.id, item.ancestor, item.descendant, item.id)
 
     @override_settings(DEBUG=True)
     def test_move(self):
